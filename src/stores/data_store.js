@@ -7,7 +7,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var data;
 var req = new XMLHttpRequest();
-req.open('GET', '/data/data.json', false);
+req.open('GET', 'http://4freedu.github.io/data/data.json', false);
 req.send(null);
 if (req.status === 200) data = JSON.parse(req.responseText);
 
