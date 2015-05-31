@@ -11,7 +11,7 @@ a.tag {
   color: #FFFFFF;
   text-decoration: none;
 }
-a,a:hover {
+a:hover {
   text-decoration: none;
 }
 .tag-container:hover {
@@ -21,6 +21,9 @@ a,a:hover {
   margin-top: 150px;
 }
 .product {
-  width: 175px;
-  height: 175px;
+  width: 200px;
+  height: 225px;
+}
+div.product:hover {
+  border: solid 1px #F012BE;
 }

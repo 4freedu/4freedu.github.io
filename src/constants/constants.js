@@ -2,5 +2,6 @@ var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
   SEARCH: null,
-  TOGGLE_TAG: null
+  TOGGLE_TAG: null,
+  SUBMIT: null
 });

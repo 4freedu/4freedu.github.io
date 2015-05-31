@@ -29,20 +29,21 @@ var Results = React.createClass({
                 <div>
                   {school.products.map((product,i) => {
                     return (
-                      <div key={i+product} className='product col clearfix mr4 mb3'>
-                        <p><a className='product bold' href={product.url}>{product.name}</a></p>
-                        <p>{product.price}</p>
-                        {product.duration !== 'forever' && <p className='duration'>Duration: {product.duration}</p>}
-                        {product.tags.map((t,i) => {
-                          return (
-                            <div 
-                              key={i+t}
-                              className='border rounded bg-blue white col clearfix mr1 tag-container white'
-                              onClick={this.findTag.bind(this, t)}>
-                              {t}
-                            </div>
-                          );
-                        })}
+                      <div key={i+product} className='product col clearfix mr4 mb3 p2'>
+                        <p><a className='product h2' href={product.url}>{product.name}</a></p>
+                        <p>{product.price + (product.duration !== 'forever' ? ',' + product.duration : '')}</p>
+                        <div className='clearfix'>
+                          {product.tags.map((t,i) => {
+                            return (
+                              <div
+                                key={i+t}
+                                className='border rounded bg-blue white col clearfix mr1 mb1 tag-container white'
+                                onClick={this.findTag.bind(this, t)}>
+                                {t}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     );
                   })}
