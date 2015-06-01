@@ -31,7 +31,7 @@ function submit(school, product, price, duration, link, tags) {
     var req = new XMLHttpRequest();
     req.onload = () => {
       if (req.status >= 400)
-        reject(JSON.parse(req.response).message)
+        reject(JSON.parse(req.response).message);
       else
         resolve();
     };

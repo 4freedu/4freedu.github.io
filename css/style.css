@@ -7,6 +7,9 @@ p {
 .large {
   font-size: 40px;
 }
+a {
+  color: #0074D9;
+}
 a.tag {
   color: #FFFFFF;
   text-decoration: none;
@@ -23,7 +26,12 @@ a:hover {
 .product {
   width: 200px;
   height: 225px;
+  overflow: hidden;
 }
 div.product:hover {
   border: solid 1px #F012BE;
+  overflow: visible;
+}
+.prod-tags {
+  height: 75px;
 }

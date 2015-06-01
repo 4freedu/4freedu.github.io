@@ -14,8 +14,7 @@ var Results = React.createClass({
     this.setState({ results: DataStore.getResults() });
   },
   findTag(tag) {
-    return;
-    actions.findTag(tag);   
+    actions.toggleTag(tag);
   },
   render() {
     let results = this.state.results;
@@ -26,13 +25,13 @@ var Results = React.createClass({
             return (
               <div key={i+school} className='border-bottom mb2 clearfix'>
                 <p className='large mb2 center'>{school.name}</p>
-                <div>
+                <div className='clearfix'>
                   {school.products.map((product,i) => {
                     return (
                       <div key={i+product} className='product col clearfix mr4 mb3 p2'>
                         <p><a className='product h2' href={product.url}>{product.name}</a></p>
                         <p>{product.price + (product.duration !== 'forever' ? ',' + product.duration : '')}</p>
-                        <div className='clearfix'>
+                        <div className=' prod-tags clearfix'>
                           {product.tags.map((t,i) => {
                             return (
                               <div

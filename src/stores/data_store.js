@@ -20,7 +20,7 @@ var filtered = data;
 
 function toggleTag(tags, tag) {
   if (tags.some(t => t === tag)) {
-    let idx = findIndex(tags, (t) => tag);
+    let idx = findIndex(tags, (t) => t === tag);
     tags.splice(idx, idx+1);
   } else {
     tags.push(tag);
