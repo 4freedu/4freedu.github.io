@@ -48,10 +48,10 @@ var DataStore = xtend(EventEmitter.prototype, {
   getResults: () => filtered,
   getFilterParams: () => filterParams,
   getUrl() {
-    return 'http://freedu.com/#/?query='
-      + encodeURIComponent(filterParams.query)
-      + '&tags='
-      + encodeURIComponent(filterParams.tags.join(','));
+    var fp = filterParams
+    var q = fp.query ? 'query=' + encodeURIComponent(fp.query) : '';
+    var t = fp.tags.length ? 'tags='+ encodeURIComponent(fp.tags.join(',')) : '';
+    return `http://4freedu.github.io/#/?${q}${(q&&t) && '&'}${t}`;
   },
   emitChange() {
     this.emit(CHANGE_EVENT);

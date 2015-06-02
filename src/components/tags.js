@@ -19,9 +19,7 @@ function getStateFromStore() {
 }
 
 var Tags = React.createClass({
-  getInitialState() {
-    return getStateFromStore();
-  },
+  getInitialState: () => getStateFromStore(),
   componentWillMount() {
     DataStore.addChangeListener(this._onChange);
   },

@@ -12,10 +12,10 @@ var Search = require('./components/search'),
 var App = React.createClass({
   mixins: [ State ],
   componentWillMount() {
-    if (this.getQuery().q)
-      this.search(this.getQuery().q);
-    //else if (this.getQuery().tag)
-      //actions.findTag(this.getQuery().tag);
+    if (this.getQuery().query)
+      this.search(this.getQuery().query);
+    if (this.getQuery.tags)
+      this.search(this.getQuery().tags)
   },
   search(q) { actions.search(q); },
   render() {

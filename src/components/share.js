@@ -4,11 +4,7 @@ var React = require('react'),
 var DataStore = require('../stores/data_store');
 
 var Share = React.createClass({
-  getInitialState() {
-    return {
-      show: false
-    };
-  },
+  getInitialState: () => ({ show: false }),
   toggleShow() {
     this.setState({ show: !this.state.show });
   },

@@ -5,6 +5,14 @@ var actions = require('../actions/actions'),
     DataStore = require('../stores/data_store');
 
 var Search = React.createClass({
+  mixins: [ DataStore.listenTo ],
+  getInitialState: () => ({ url: encodeURIComponent(DataStore.getUrl()) }),
+  componentWillMount() {
+    DataStore.addChangeListener(this._onChange);
+  },
+  _onChange() {
+    this.setState({ url: encodeURIComponent(DataStore.getUrl()) });
+  },
   search(e) {
     this.props.search(e.target.value);
   },
@@ -24,6 +32,11 @@ var Search = React.createClass({
           <ZeroClipboard text={DataStore.getUrl()}>
             <button className='button full-width'>Share</button>
           </ZeroClipboard>
+          <a className='twitter-share-button'
+            href={`https://twitter.com/intent/tweet?status=Are you in college and like free stuff? ${this.state.url}`}
+              target='_blank'>
+            Tweet
+          </a>
         </div>
       </div>
     );

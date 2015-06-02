@@ -24,8 +24,6 @@ a:hover {
   margin-top: 150px;
 }
 .product {
-  width: 200px;
-  height: 225px;
   overflow: hidden;
 }
 div.product:hover {
@@ -35,3 +33,19 @@ div.product:hover {
 .prod-tags {
   height: 75px;
 }
+/* product width */
+.product {
+  width: 25%;
+  height: 225px;
+}
+@media (max-width: 1250px) {
+  .product {
+    width: 37%;
+  }
+}
+@media (max-width: 850px) {
+  .product {
+    width: 75%;
+  }
+}
+
