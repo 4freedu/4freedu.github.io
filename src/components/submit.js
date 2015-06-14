@@ -1,5 +1,4 @@
-var React = require('react'),
-    xtend = require('xtend');
+var React = require('react');
 
 var schools = [];
 var req = new XMLHttpRequest();
@@ -24,7 +23,7 @@ var Submit = React.createClass({
     e.preventDefault();
     if (!this.state.service || !this.state.link) {
       alert('You must supply the school, service, and link fields');
-      return
+      return;
     }
     /*
     // The pull request
@@ -39,7 +38,7 @@ var Submit = React.createClass({
           <form>
             <legend className='mx-auto mb2 h2 bold'>Submit</legend>
             <select onChange={this.selectSchool} className='block full-width mb1 field-light'>
-              {schools.map((s,i) => { return <option key={i+s} value={s}>{s}</option> })}
+              {schools.map((s, i) => <option key={i + s} value={s}>{s}</option> )}
             </select>
             <input type='text' className='block full-width mb1 field-light' onChange={this.updateService} placeholder='Service' />
             <input type='text' className='block full-width mb1 field-light' onChange={this.updateDuration} placeholder='Duration' />

@@ -1,22 +1,12 @@
-var React = require('react'),
-    flatten = require('flatten');
+var React = require('react');
 
 var DataStore = require('../stores/data_store'),
     actions = require('../actions/actions');
 
-function getStateFromStore() {
-  var allTags = DataStore.getData().map(school =>
-    school.products.map(product =>
-      product.tags
-    )
-  );  
-  return {
-    allTags: flatten(allTags)
-      .sort()
-      .filter((t,i,a) => t !== a[i-1]),
-    activeTags: DataStore.getFilterParams().tags
-  };
-}
+var getStateFromStore = () => ({
+    allTags: DataStore.getAllTags(),
+    activeTags: DataStore.getActiveTags()
+});
 
 var Tags = React.createClass({
   getInitialState: () => getStateFromStore(),
@@ -33,10 +23,10 @@ var Tags = React.createClass({
     return (
       <div className='clearfix bg-white'>
         <p className='large center'>Tags</p>
-        {this.state.allTags.map((t,i) => {
+        {this.state.allTags.map((t, i) => {
           return (
-            <div 
-              key={i+t}
+            <div
+              key={i + t}
               className={'border rounded white col mr1 mb1 tag-container white ' +
               (this.state.activeTags.some(tag => tag === t) ? 'bg-fuchsia' : 'bg-blue')}
               onClick={this.selectTag.bind(this, t)}>

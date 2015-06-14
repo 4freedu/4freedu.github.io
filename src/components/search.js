@@ -1,8 +1,7 @@
 var React = require('react'),
     ZeroClipboard = require('react-zeroclipboard');
 
-var actions = require('../actions/actions'),
-    DataStore = require('../stores/data_store');
+var DataStore = require('../stores/data_store');
 
 var Search = React.createClass({
   mixins: [ DataStore.listenTo ],
