@@ -15,7 +15,7 @@ var App = React.createClass({
     if (this.getQuery().query)
       this.search(this.getQuery().query);
     if (this.getQuery.tags)
-      this.search(this.getQuery().tags)
+      this.search(this.getQuery().tags);
   },
   search(q) { actions.search(q); },
   render() {

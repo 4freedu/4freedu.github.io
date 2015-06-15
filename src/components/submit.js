@@ -12,13 +12,30 @@ var Submit = React.createClass({
       school: 'all',
       service: '',
       duration: '',
-      link: ''
+      link: '',
+      tag: '',
+      tags: []
     };
   },
-  selectSchool(e) { this.setState({ school: e.target.value }); },
-  updateService(e) { this.setState({ service: e.target.value }); },
-  updateDuration(e) { this.setState({ duration: e.target.value }); },
-  updateLink(e) { this.setState({ link: e.target.value }); },
+  update(prop, e) {
+    this.setState({ [prop]: e.target.value });
+  },
+  onKeyDown(e) {
+    if (e.target.tagName === 'INPUT' && e.keyCode === 13) {
+      if (this.state.tag && !this.state.tags.some(t => t === this.state.tag)) {
+        var tags = this.state.tags;
+        tags.push(this.state.tag);
+        this.setState({ tags: tags, tag: '' }, () => {
+          React.findDOMNode(this.refs.tagInput).value = '';
+        });
+      }
+    }
+  },
+  removeTag(tag) {
+    var tags = this.state.tags;
+    tags = tags.filter(t => t !== tag);
+    this.setState({ tags: tags });
+  },
   submit(e) {
     e.preventDefault();
     if (!this.state.service || !this.state.link) {
@@ -32,20 +49,37 @@ var Submit = React.createClass({
     */
   },
   render() {
+    let inputClass = 'block full-width mb2 field-light';
+
     return (
       <div className='clearfix mxn2'>
         <div className=' col-8 mx-auto'>
-          <form>
+          <div>
             <legend className='mx-auto mb2 h2 bold'>Submit</legend>
-            <select onChange={this.selectSchool} className='block full-width mb1 field-light'>
+            <select onChange={this.update.bind(this, 'school')} className={inputClass}>
               {schools.map((s, i) => <option key={i + s} value={s}>{s}</option> )}
             </select>
-            <input type='text' className='block full-width mb1 field-light' onChange={this.updateService} placeholder='Service' />
-            <input type='text' className='block full-width mb1 field-light' onChange={this.updateDuration} placeholder='Duration' />
-            <input type='text' className='block full-width mb1 field-light' onChange={this.updateLink} placeholder='Link' />
-            <input type='text' className='block full-width mb1 field-light' onChange={this.updateLink} placeholder='Tags' />
-            <input type='submit' className='button' onClick={this.submit} />
-          </form>
+            {this.state.school === 'other' && <input type='text' className={inputClass} onChange={this.update.bind(this, 'school')} placeholder='School' />}
+            <input type='text' className={inputClass} onChange={this.update.bind(this, 'service')} placeholder='Service' />
+            <input type='text' className={inputClass} onChange={this.update.bind(this, 'duration')} placeholder='Duration' />
+            <input type='text' className={inputClass} onChange={this.update.bind(this, 'link')} placeholder='Link' />
+            <div className='block full-width clearfix tag-input-div mb2 p1'>
+              {this.state.tags.map(tag => <div
+                className='border rounded bg-fuchsia white col clearfix mr1 tag-container white'
+                onClick={this.removeTag.bind(this, tag)}>
+                {tag}
+                <div className='ml1 fa fa-times'></div>
+              </div>)}
+              <input type='text'
+                ref='tagInput'
+                className='col tag-input'
+                onChange={this.update.bind(this, 'tag')}
+                onKeyDown={this.onKeyDown}
+                placeholder='Tags - hit enter after each tag'
+              />
+            </div>
+            <input type='submit' className='button block full-width' onClick={this.submit} />
+          </div>
         </div>
       </div>
     );

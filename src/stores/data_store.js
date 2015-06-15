@@ -56,7 +56,7 @@ function filter(_data, query, tags) {
     results = _data;
   }
 
-  if (tags.length) {
+  if (tags.length) { // now narrow down by tags
     results = results.map(school => {
       school = school.toJS();
       school.products = school.products.filter(product =>

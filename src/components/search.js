@@ -18,7 +18,7 @@ var Search = React.createClass({
   render() {
     return (
       <div id='search-container clearfix' className='mb1'>
-        <div className='col col-10 clearfix'>
+        <div className='col col-9 clearfix'>
           <input
             id='search'
             type='text'
@@ -27,14 +27,13 @@ var Search = React.createClass({
             className='block full-width mb1 field-light'
           />
         </div>
-        <div className='col col-2'>
-          <ZeroClipboard text={DataStore.getUrl()}>
-            <button className='button full-width'>Share</button>
-          </ZeroClipboard>
+        <div className='col col-2 h6 ml2'>
           <a className='twitter-share-button'
             href={`https://twitter.com/intent/tweet?status=Are you in college and like free stuff? ${this.state.url}`}
               target='_blank'>
-            Tweet
+            <ZeroClipboard text={DataStore.getUrl()}>
+              <button className='button full-width'>Tweet search results!</button>
+            </ZeroClipboard>
           </a>
         </div>
       </div>

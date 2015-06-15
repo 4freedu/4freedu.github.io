@@ -48,3 +48,19 @@ div.product:hover {
     width: 75%;
   }
 }
+/* submit tags */
+.tag-input-div {
+  background-color: #FFFFFF;
+  webkit-transition: box-shadow .2s ease;
+  transition: box-shadow .2s ease;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0,0,0,.125);
+  border-radius: 3px;
+}
+.tag-input {
+  border: none;
+}
+input.tag-input:focus {
+  border: none;
+}
