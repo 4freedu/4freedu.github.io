@@ -22,19 +22,19 @@ var Results = React.createClass({
           {results.map((school, idx1) => {
             return (
               <div key={idx1 + school} className='border-bottom mb2 clearfix'>
-                <u><p className='large mb2 center'>{school.get('name')}</p></u>
+                <p className='large mb2 center'>{school.get('name')}</p>
                 <div className='clearfix'>
                   {school.get('products').map((product, idx2) => {
                     return (
                       <div key={idx2 + product} className='product col clearfix mr4 mb3 p2'>
-                        <p><a className='product h2' href={product.get('url')} target='_blank'>{product.get('name')}</a></p>
+                        <p><a className='product h3' href={product.get('url')} target='_blank'>{product.get('name')}</a></p>
                         <p>{product.get('price') + (product.get('duration') !== 'forever' ? ',' + product.get('duration') : '')}</p>
                         <div className='prod-tags clearfix'>
-                          {product.get('tags').map((t, idx3) => {
+                          {product.get('tags').sort().map((t, idx3) => {
                             return (
                               <div
                                 key={idx3 + t}
-                                className='border rounded bg-blue white col clearfix mr1 mb1 tag-container white'
+                                className='border border-blue bg-white px1 blue rounded col clearfix mr1 mb1 tag-container'
                                 onClick={this.findTag.bind(this, t)}>
                                 {t}
                               </div>

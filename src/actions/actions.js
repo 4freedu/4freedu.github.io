@@ -13,13 +13,18 @@ var Actions = {
     Dispatcher.handleViewAction({
       source: Constants.TOGGLE_TAG,
       tag: tag
-    })
+    });
+  },
+  reset() {
+    Dispatcher.handleViewAction({
+      source: Constants.RESET
+    });
   },
   submit(school, product, duration, link, tags) {
-    submit(school, product, duration, link, tags)
+    submit(school, product, duration, link, tags);
     Dispatcher.handleViewAction({
       source: Constants.SUBMIT
-    })
+    });
   }
 };
 

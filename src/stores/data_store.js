@@ -73,6 +73,7 @@ var CHANGE_EVENT = 'change';
 
 var DataStore = xtend(EventEmitter.prototype, {
   getData: () => data,
+  getSchools: () => data.map(school => school.get('name')),
   getResults: () => filtered,
   getActiveTags: () => filterParams.tags,
   getAllTags() {
@@ -106,6 +107,10 @@ var DataStore = xtend(EventEmitter.prototype, {
         break;
       case Constants.TOGGLE_TAG:
         filterParams.tags = toggleTag(filterParams.tags, action.tag);
+        break;
+      case Constants.RESET:
+        filterParams.query = '';
+        filterParams.tags = [];
         break;
     }
     filtered = filter(data, filterParams.query, filterParams.tags);

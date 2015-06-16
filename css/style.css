@@ -2,10 +2,10 @@ p {
   font-size: 20px;
 }
 .xlarge {
-  font-size: 50px;
+  font-size: 40px;
 }
 .large {
-  font-size: 40px;
+  font-size: 30px;
 }
 a {
   color: #0074D9;
@@ -19,9 +19,16 @@ a:hover {
 }
 .tag-container:hover {
   background-color: #F012BE;
+  color: #FFFFFF;
+  border: solid 1px #F012BE;
 }
 .results,.tags {
-  margin-top: 150px;
+  margin-top: 70px;
+}
+.tags {
+  overflow: scroll;
+  width: 200px;
+  margin-right: 220px;
 }
 .product {
   overflow: hidden;
@@ -64,3 +71,4 @@ div.product:hover {
 input.tag-input:focus {
   border: none;
 }
+

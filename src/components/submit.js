@@ -1,14 +1,11 @@
 var React = require('react');
 
-var schools = [];
-var req = new XMLHttpRequest();
-req.open('GET', 'http://4freedu.github.io/data/schools.json', false);
-req.send(null);
-if (req.status === 200) schools = JSON.parse(req.responseText);
+var DataStore = require('../stores/data_store');
 
 var Submit = React.createClass({
   getInitialState() {
     return {
+      schools: DataStore.getSchools(),
       school: 'all',
       service: '',
       duration: '',
@@ -42,11 +39,6 @@ var Submit = React.createClass({
       alert('You must supply the school, service, and link fields');
       return;
     }
-    /*
-    // The pull request
-    req = new XMLHttpRequest();
-    req.open()
-    */
   },
   render() {
     let inputClass = 'block full-width mb2 field-light';
@@ -57,7 +49,7 @@ var Submit = React.createClass({
           <div>
             <legend className='mx-auto mb2 h2 bold'>Submit</legend>
             <select onChange={this.update.bind(this, 'school')} className={inputClass}>
-              {schools.map((s, i) => <option key={i + s} value={s}>{s}</option> )}
+              {this.state.schools.map((s, i) => <option key={i + s} value={s}>{s}</option> )}
             </select>
             {this.state.school === 'other' && <input type='text' className={inputClass} onChange={this.update.bind(this, 'school')} placeholder='School' />}
             <input type='text' className={inputClass} onChange={this.update.bind(this, 'service')} placeholder='Service' />
@@ -66,7 +58,8 @@ var Submit = React.createClass({
             <div className='block full-width clearfix tag-input-div mb2 p1'>
               {this.state.tags.map(tag => <div
                 className='border rounded bg-fuchsia white col clearfix mr1 tag-container white'
-                onClick={this.removeTag.bind(this, tag)}>
+                onClick={this.removeTag.bind(this, tag)}
+              >
                 {tag}
                 <div className='ml1 fa fa-times'></div>
               </div>)}

@@ -21,20 +21,16 @@ var Tags = React.createClass({
   },
   render() {
     return (
-      <div className='clearfix bg-white'>
+      <div className='clearfix'>
         <p className='large center'>Tags</p>
-        {this.state.allTags.map((t, i) => {
-          return (
-            <div
-              key={i + t}
-              className={'border rounded white col mr1 mb1 tag-container white ' +
-              (this.state.activeTags.some(tag => tag === t) ? 'bg-fuchsia' : 'bg-blue')}
-              onClick={this.selectTag.bind(this, t)}>
-              {t}
-              {this.state.activeTags.some(tag => tag === t) && <i className='ml1 mr1 fa fa-times'> </i>}
-            </div>
-          );
-        })}
+        {this.state.allTags.map((t, i) => <div
+          key={i + t}
+          className={'border rounded white col mr1 mb1 tag-container px1 ' + (this.state.activeTags.some(tag => tag === t) ? 'bg-fuchsia white' : 'bg-white border-blue blue')}
+          onClick={this.selectTag.bind(this, t)}
+        >
+          {t}
+          {this.state.activeTags.some(tag => tag === t) && <i className='ml1 fa fa-times'></i>}
+        </div>)}
       </div>
     );
   }
