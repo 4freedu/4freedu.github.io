@@ -12,7 +12,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var data;
 var req = new XMLHttpRequest();
-req.open('GET', 'http://4freedu.github.io/data/data.json', false);
+req.open('GET', 'http://freedu.pw/data/data.json', false);
 req.send(null);
 if (req.status === 200) data = Immutable.fromJS(JSON.parse(req.responseText));
 
