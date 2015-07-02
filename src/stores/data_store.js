@@ -85,7 +85,7 @@ var DataStore = xtend(EventEmitter.prototype, {
   },
   getFilterParams: () => filterParams,
   getUrl() {
-    if (!filterParams.query && !filterParams.tags.length) return '4freedu.github.io';
+    if (!filterParams.query && !filterParams.tags.length) return 'freedu.pw';
     var q = filterParams.query ? 'query=' + encodeURIComponent(filterParams.query) : '';
     var t = filterParams.tags.length ? 'tags=' + encodeURIComponent(filterParams.tags.join(',')) : '';
     return `http://4freedu.github.io/#/?${q}${(q && t) && '&'}${t}`;
