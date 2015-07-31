@@ -1,9 +1,8 @@
 var Immutable = require('immutable'),
     xtend = require('xtend'),
     flatten = require('flatten'),
-    { EventEmitter } = require('events');
-
-var Dispatcher = require('../dispatcher/dispatcher'),
+    { EventEmitter } = require('events'),
+    Dispatcher = require('../dispatcher/dispatcher'),
     Constants = require('../constants/constants');
 
 /**
@@ -101,9 +100,13 @@ var DataStore = xtend(EventEmitter.prototype, {
   },
   dispatcherIndex: Dispatcher.register(payload => {
     let action = payload.action;
+    let params = filterParams;
     switch (action.source) {
       case Constants.SEARCH:
         filterParams.query = action.input;
+        break;
+      case Constants.LOAD_TAGS:
+        filterParams.tags = action.tags;
         break;
       case Constants.TOGGLE_TAG:
         filterParams.tags = toggleTag(filterParams.tags, action.tag);

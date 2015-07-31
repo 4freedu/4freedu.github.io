@@ -1,6 +1,5 @@
-var React = require('react');
-
-var actions = require('../actions/actions');
+var React = require('react'),
+    actions = require('../actions/actions');
 
 var Search = React.createClass({
   search(e) {
@@ -13,7 +12,7 @@ var Search = React.createClass({
         type='text'
         onChange={this.search}
         placeholder='search by school or by service'
-        className='full-width field-light'
+        className='field-light full-width'
       />
     );
   }

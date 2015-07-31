@@ -15,13 +15,19 @@ var Actions = {
       tag: tag
     });
   },
+  loadTags(tags) {
+    Dispatcher.handleViewAction({
+      source: Constants.LOAD_TAGS,
+      tags: tags
+    });
+  },
   reset() {
     Dispatcher.handleViewAction({
       source: Constants.RESET
     });
   },
-  submit(school, product, duration, link, tags) {
-    submit(school, product, duration, link, tags);
+  submit(data) {
+    submit(data);
     Dispatcher.handleViewAction({
       source: Constants.SUBMIT
     });

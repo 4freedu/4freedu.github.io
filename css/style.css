@@ -40,6 +40,13 @@ div.product:hover {
 .prod-tags {
   height: 75px;
 }
+
+.center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
 /* product width */
 .product {
   width: 25%;

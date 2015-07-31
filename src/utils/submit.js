@@ -25,12 +25,12 @@ function submit(data/*school, product, price, duration, link, tags*/) {
       var req = new XMLHttpRequest();
       req.open('GET', 'https://api.github.com/repos/4freedu/data/git/refs/heads', true);
       req.onload = () => {
-        if (/*req.reponse.status === 200*/ true) {
+        if (/*req.status === 200*/ true) {
           var sha = JSON.parse(req.responseText)
             .filter(b => { return b.ref === 'refs/heads/gh-pages' })[0].object.sha;
           resolve(sha);
         } else {
-          reject();
+          reject(JSON.parse(req.responseText));
         }
       };
       req.send();
@@ -41,12 +41,12 @@ function submit(data/*school, product, price, duration, link, tags*/) {
     return new Promise((resolve, reject) => {
       var req = new XMLHttpRequest();
       req.open('POST', 'https://api.github.com/repos/4freedu/data/git/refs', true);
-      req.setRequestHeader('Authorization', 'token 2860f6ed1f3611cd8c08facd63af562f3fc2e02f');
+      req.setRequestHeader('Authorization', 'token 3e3dafe7914eb88220763ac218fb8007881ad5af');
       req.onload = () => {
-        if (/*req.reponse.status === 200*/ true) {
-          resolve(sha);
+        if (/*req.status === 200*/ true) {
+          resolve();
         } else {
-          reject();
+          reject(JSON.parse(req.responseText));
         }
       };
       req.send(JSON.stringify({
@@ -56,22 +56,18 @@ function submit(data/*school, product, price, duration, link, tags*/) {
 
     });
   }
-
   function getNewSHA() {
     return new Promise((resolve, reject) => {
       var req = new XMLHttpRequest();
-      req.open('PUT', 'https://api.github.com/repos/4freedu/data/content/data.json', true);
+      req.open('GET', `https://api.github.com/repos/4freedu/data/contents/data.json?ref=${/*branch*/'d5ae203acb19dbda500503db6dd31b04'}`, true);
       req.onload = () => {
-        if (/*req.response.status === 200*/ true) {
+        if (/*req.status === 200*/ true) {
           resolve(JSON.parse(req.responseText).sha);
         } else {
-          reject();
+          reject(JSON.parse(req.responseText));
         }
       };
-      req.send(JSON.stringify({
-        ref: branch,
-        path: 'data.json'
-      }));
+      req.send();
     });
   }
 
@@ -79,30 +75,45 @@ function submit(data/*school, product, price, duration, link, tags*/) {
 
   function commitData(sha) {
     return new Promise((resolve, reject) => {
-      var reqData = {
-        path: 'data',
+      var r = {
         message: `add ${updated.product} to ${updated.school}`,
         content: Base64.encode(JSON.stringify(updated, null, 2)),
         sha: sha,
-        branch: branch
+        branch: 'd5ae203acb19dbda500503db6dd31b04'//branch
       };
       var req = new XMLHttpRequest();
       req.open('PUT', 'https://api.github.com/repos/4freedu/data/contents/data.json', true);
-      req.setRequestHeader('Authorization', 'token 2860f6ed1f3611cd8c08facd63af562f3fc2e02f');
+      req.setRequestHeader('Authorization', 'token f5797a4ff267ec4f45e072e49a50c2e5b1217fa3');
       req.onload = () => {
-        if (/* req.response.status === 200 */ true) {
+        if (/*req.status === 200*/ true) {
           resolve();
         } else {
-          reject();
+          reject(JSON.parse(req.responseText));
         }
       };
-      req.send(JSON.stringify(reqData));
+      req.send(JSON.stringify(r));
     });
   }
 
-  return getSHA()
+  function openPullRequest() {
+    return new Promise((resolve, reject) => {
+      var req = new XMLHttpRequest();
+      req.open();
+      req.onload = () => {
+        if (/*req.response.status === 200*/ true) {
+          resolve();
+        } else {
+          reject(req.responseText);
+        }
+      };
+      req.send();
+    });
+  }
+
+  /*return getSHA()
     .then(createBranch)
-    .then(commitData);
+    .then(getNewSHA)
+    .then(commitData);*/
 }
 
 submit();
